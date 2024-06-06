@@ -1,20 +1,19 @@
-import{getData}from "../facth_api"
-import {Cardcomponent } from "../components/CardComponent";
-
+import { getData } from "../stored/fatch_aip.js";
+import  {CardComponent } from "../components/CardComponent.js";
 
 const renderArea = document.querySelector("#renderArea");
-const  Test_url = "http://127.0.0.1:5500/data/products.js";
+const url = "http://127.0.0.1:5500/data/products.json";
 
-async function testData(){
-
-    try{
-        const res =  await fetch(Test_url);
-        const products = await res.json();
-        products.forEach((pro)=>{
-            renderArea.innerHTML  += Cardcomponent(pro);
-        });
-    }catch (error) {
-        console.error(" Fatch data when worng:", error);
-    }
+async function testFetchData() {
+  try {
+    const res = await fetch(url);
+    const pro = await res.json();
+    pro.forEach((product) => {
+      renderArea.innerHTML += CardComponent(product);
+    });
+  } catch (error) {
+    console.error("Fatching Data went wrong", error);
+  }
 }
-testData();
+
+testFetchData();
